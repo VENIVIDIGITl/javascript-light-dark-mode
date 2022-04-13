@@ -7,29 +7,20 @@ const image3 = document.getElementById('image3');
 const textBox = document.getElementById('text-box');
 
 
-// Dark Mode Styles
-function darkMode() {
-  nav.style.backgroundColor = 'rgb(0 0 0 / 50%)';
-  textBox.style.backgroundColor = 'rgba(255 255 255 / 50%)';
-  toggleIcon.children[0].textContent = 'Dark Mode';
-  toggleIcon.children[1].classList.remove('fa-sun');
-  toggleIcon.children[1].classList.add('fa-moon');
-  image1.src = 'img/undraw_proud_coder_dark.svg';
-  image2.src = 'img/undraw_feeling_proud_dark.svg';
-  image3.src = 'img/undraw_conceptual_idea_dark.svg';
-}
-
-
-// Light Mode Styles
-function lightMode() {
-  nav.style.backgroundColor = 'rgb(255 255 255 / 50%)';
-  textBox.style.backgroundColor = 'rgba(0 0 0 / 50%)';
-  toggleIcon.children[0].textContent = 'Light Mode';
-  toggleIcon.children[1].classList.remove('fa-moon');
-  toggleIcon.children[1].classList.add('fa-sun');
-  image1.src = 'img/undraw_proud_coder_light.svg';
-  image2.src = 'img/undraw_feeling_proud_light.svg';
-  image3.src = 'img/undraw_conceptual_idea_light.svg';
+// Set Dark / Light Mode Styles
+function setMode(theme) {
+  const lightMode = theme === 'light';
+  const light = 'rgb(255 255 255 / 50%)';
+  const dark = 'rgba(0 0 0 / 50%)';
+  const currentIcon = lightMode ? 'fa-moon' : 'fa-sun';
+  const newIcon = lightMode ? 'fa-sun' : 'fa-moon';
+  nav.style.backgroundColor = lightMode ? light : dark;
+  textBox.style.backgroundColor = lightMode ? light : dark;
+  toggleIcon.children[0].textContent = `${theme.replace(/^\w/, c => c.toUpperCase())} Mode`;
+  toggleIcon.children[1].classList.replace(currentIcon, newIcon);
+  image1.src = `img/undraw_proud_coder_${theme}.svg`;
+  image2.src = `img/undraw_feeling_proud_${theme}.svg`;
+  image3.src = `img/undraw_conceptual_idea_${theme}.svg`;
 }
 
 
@@ -37,10 +28,10 @@ function lightMode() {
 function switchTheme(event) {
   if (event.target.checked) {
     document.documentElement.setAttribute('data-theme', 'dark');
-    darkMode();
+    setMode('dark');
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
-    lightMode();
+    setMode('light');
   }
 }
 
