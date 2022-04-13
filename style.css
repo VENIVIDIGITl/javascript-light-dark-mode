@@ -161,7 +161,7 @@ button:hover:not(.outline) {
   width: 40%;
   text-align: justify;
   background: rgb(0 0 0 / 50%);
-  color: var(--on-primary);
+  color: var(--on-background);
   border-radius: 10px;
   padding: 30px;
 }
